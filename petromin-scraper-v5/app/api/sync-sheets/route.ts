@@ -18,7 +18,7 @@ interface Offer {
 // Google Sheet ID from URL
 const SPREADSHEET_ID = '1i06C134REepCwvr-LXaIIQnEOyYJp6yQGDClCWQjbx4';
 
-async function getAuthClient() {h
+async function getAuthClient() {
   // Get credentials from environment variable
   const credentials = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
   
