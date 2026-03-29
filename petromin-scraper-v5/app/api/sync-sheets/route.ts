@@ -18,7 +18,7 @@ interface Offer {
 // Google Sheet ID from URL
 const SPREADSHEET_ID = '1i06C134REepCwvr-LXaIIQnEOyYJp6yQGDClCWQjbx4';
 
-async function getAuthClient() {
+async function getAuthClient() {h
   // Get credentials from environment variable
   const credentials = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
   
@@ -94,30 +94,30 @@ export async function POST(request: NextRequest) {
       ])
     ];
 
-    // Clear and update English sheet (Sheet1)
+    // Clear and update English sheet (Petromin(Eng))
     await sheets.spreadsheets.values.clear({
       spreadsheetId: SPREADSHEET_ID,
-      range: 'Sheet1!A:K',
+      range: 'Petromin(Eng)!A:K',
     });
 
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
-      range: 'Sheet1!A1',
+      range: 'Petromin(Eng)!A1',
       valueInputOption: 'RAW',
       requestBody: {
         values: englishData,
       },
     });
 
-    // Check if Sheet2 exists, if not create it
+    // Check if Petromin(Ar) exists, if not create it
     const spreadsheet = await sheets.spreadsheets.get({
       spreadsheetId: SPREADSHEET_ID,
     });
 
     const sheetNames = spreadsheet.data.sheets?.map(s => s.properties?.title) || [];
     
-    if (!sheetNames.includes('Sheet2')) {
-      // Create Sheet2
+    if (!sheetNames.includes('Petromin(Ar)')) {
+      // Create Petromin(Ar)
       await sheets.spreadsheets.batchUpdate({
         spreadsheetId: SPREADSHEET_ID,
         requestBody: {
@@ -125,7 +125,7 @@ export async function POST(request: NextRequest) {
             {
               addSheet: {
                 properties: {
-                  title: 'Sheet2',
+                  title: 'Petromin(Ar)',
                 },
               },
             },
@@ -134,15 +134,15 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Clear and update Arabic sheet (Sheet2)
+    // Clear and update Arabic sheet (Petromin(Ar))
     await sheets.spreadsheets.values.clear({
       spreadsheetId: SPREADSHEET_ID,
-      range: 'Sheet2!A:K',
+      range: 'Petromin(Ar)!A:K',
     });
 
     await sheets.spreadsheets.values.update({
       spreadsheetId: SPREADSHEET_ID,
-      range: 'Sheet2!A1',
+      range: 'Petromin(Ar)!A1',
       valueInputOption: 'RAW',
       requestBody: {
         values: arabicData,
